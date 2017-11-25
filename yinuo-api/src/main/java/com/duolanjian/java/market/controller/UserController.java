@@ -1,23 +1,29 @@
 package com.duolanjian.java.market.controller;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.duolanjian.java.market.bean.User;
 import com.duolanjian.java.market.service.UserService;
+import com.duolanjian.java.market.util.HttpUtil;
 import com.duolanjian.java.market.util.JedisUtil;
-import com.duolanjian.java.market.util.MD5Util;
 import com.duolanjian.java.market.validation.Validation;
 
 @RestController
 public class UserController {
+	
+	private static final String appid= "wx254e077517572b8a";
+	
+	private static final String appsecret = "d21ea703e91c9cae25dff51d2aeb177b";
 
 	@Autowired
 	private Validation validation;
@@ -26,19 +32,28 @@ public class UserController {
 	private UserService userService;
 	
 	@Autowired
-	private MD5Util md5Util;
-	
-	@Autowired
 	private JedisUtil jedisUtil;
 	
-	@RequestMapping(value="/loginByWeixin", method=RequestMethod.GET)
+	private Logger logger = LoggerFactory.getLogger(UserController.class);
+	
+	@RequestMapping(value="/onLogin", method=RequestMethod.GET)
 //    @ResponseBody
     public Object post(@RequestParam(name="code") String code){
 		Map<String,Object> result = new HashMap<String, Object>();
 		
+		String wechatUrl = String.format("https://api.weixin.qq.com/sns/jscode2session"
+				+ "?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", URLEncoder.encode(appid), 
+				URLEncoder.encode(appsecret), URLEncoder.encode(code));
+		logger.info("wechatUrl: " + wechatUrl);
 		
+		String response = HttpUtil.sendGet(wechatUrl);
+		logger.info("response: " + response);
 		
-		result.put("id", 1);
+		String uuid = UUID.randomUUID().toString();
+		//jedisUtil.set(code, uuid, 60 * 60);
+		//jedisUtil.set(uuid, code, 60 * 60);
+		
+		result.put("id", uuid);
 		return result;
     }
 	/*

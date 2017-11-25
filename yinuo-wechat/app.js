@@ -10,6 +10,20 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if(res.code) {
+          wx.request({
+            url: "https://www.kehue.com/yinuo/onLogin",
+            data: {
+              code: res.code
+            },
+            success: function(res) {
+              console.log(res);
+            }
+
+          })
+        }else {
+          console.log("login fail, " + res.errMsg);
+        }
       }
     })
     // 获取用户信息
