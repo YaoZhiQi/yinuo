@@ -1,7 +1,8 @@
 package com.duolanjian.java.market.util;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,20 +37,10 @@ public class HttpClientTest {
     }
 	
 	@Test
-    public void testGet2() {
-		String wechatUrl = String.format("https://api.weixin.qq.com/sns/jscode2session"
-				+ "?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", URLEncoder.encode(appid), 
-				URLEncoder.encode(appsecret), URLEncoder.encode("1"));
-		logger.info("wechatUrl: " + wechatUrl);
-		String result1= "";
-        try{
-        	result1 = HttpsUtil.get(wechatUrl, null);
-        }catch(Exception e) {
-        	e.printStackTrace();
-        }
-    	System.out.println(result1);
-        //输出{"param":"你好世界"}
-    }
+	public void printTime() {
+		Date date = new Date(0);
+		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+	}
 	
     @Test
     public void testPost() throws UnsupportedEncodingException{
