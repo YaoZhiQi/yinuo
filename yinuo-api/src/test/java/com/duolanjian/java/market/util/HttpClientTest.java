@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -38,6 +39,8 @@ public class HttpClientTest {
 	
 	@Test
 	public void printTime() {
+		System.out.println(UUID.randomUUID().toString());
+		
 		Date date = new Date(0);
 		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
 	}
