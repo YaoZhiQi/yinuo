@@ -4,12 +4,21 @@
 接口设计
 
 环境ip：47.100.24.40 端口：80
-wechat登陆
 
-	request/get: /onLogin?code=${res.code}
+wechat登陆
+	request/get: /wechatLogin?code=${res.code}
 
 	response
 		{
-			"id": "e4911dba-e7f7-4e08-a59c-4d243355098d"
+			"id": "e4911dba-e7f7-4e08-a59c-4d243355098d",
+			"loginUser": {
+				"birthday": "1970-01-01 08:00:00",
+				"createTime": "2017-11-08 20:48:18",
+				"id": 1,
+				"sex": 0,
+				"wechatNickname": "",
+				"wechatOpenid": "onIX60AX6xG8RsqnPr1b"
+			}
 		}
 	
+		以后每次请求，在header中带上，key:ticket, value:${id}

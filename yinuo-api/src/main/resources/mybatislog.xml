@@ -10,7 +10,7 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias alias="Student" type="com.duolanjian.java.market.bean.Student" />
+		<typeAlias alias="Student" type="com.yinuo.bean.Student" />
 	</typeAliases>
 	
 	<mappers>

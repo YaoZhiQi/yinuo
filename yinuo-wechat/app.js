@@ -12,7 +12,7 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if(res.code) {
           wx.request({
-            url: "https://www.kehue.com/yinuo/onLogin",
+            url: "https://www.kehue.com/yinuo/wechatLogin",
             data: {
               code: res.code
             },

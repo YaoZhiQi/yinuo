@@ -16,7 +16,7 @@
     <context:annotation-config/>
                           
     <!-- 自动扫描 -->
-    <context:component-scan base-package="com.duolanjian.java.market" >
+    <context:component-scan base-package="com.yinuo" >
     	<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->
     </context:component-scan> 
     
@@ -25,12 +25,12 @@
     	<aop:include name="indexAspect" />
     </aop:aspectj-autoproxy>
     
-    <bean id="indexAspect" class="com.duolanjian.java.market.aspect.IndexAspect"/>
+    <bean id="indexAspect" class="com.yinuo.aspect.IndexAspect"/>
     
     <!-- 引入配置文件 -->  
     <bean id="propertyConfigurer" name="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="location" value="classpath:market.properties" />
+        <property name="location" value="classpath:yinuo.properties" />
     </bean> 
     
     <bean id="dataSourceCore" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
@@ -71,7 +71,7 @@
   
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="com.duolanjian.java.market.mapper" /> 
+        <property name="basePackage" value="com.yinuo.mapper" /> 
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryCore"></property>  
     </bean>  
   
@@ -89,7 +89,7 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
         <qualifier type="org.springframework.beans.factory.annotation.Qualifier" value="sqlSessionFactoryLog"/>
-        <property name="basePackage" value="com.duolanjian.java.market.mapperlog" /> 
+        <property name="basePackage" value="com.yinuo.mapperlog" /> 
         <property name="sqlSessionFactory" ref="sqlSessionFactoryLog"></property>  
     </bean>  
   

@@ -10,7 +10,7 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias alias="User" type="com.duolanjian.java.market.bean.User" />
+		<typeAlias alias="User" type="com.yinuo.bean.User" />
 		<!-- <typeAlias alias="Order" type="com.duolanjian.java.market.bean.Order" />
 		<typeAlias alias="Shop" type="com.duolanjian.java.market.bean.Shop" />
 		<typeAlias alias="Commodity" type="com.duolanjian.java.market.bean.Commodity" />

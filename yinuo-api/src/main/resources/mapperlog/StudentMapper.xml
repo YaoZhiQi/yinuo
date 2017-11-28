@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.duolanjian.java.market.mapperlog.StudentMapper">
+<mapper namespace="com.yinuo.mapperlog.StudentMapper">
 
 	<resultMap id="studentMap" type="Student">
 		<result property="id" column="pk_id" />

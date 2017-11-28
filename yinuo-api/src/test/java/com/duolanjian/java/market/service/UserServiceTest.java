@@ -6,14 +6,14 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.duolanjian.java.market.bean.User;
-import com.duolanjian.java.market.util.MD5Util;
+import com.yinuo.bean.User;
+import com.yinuo.service.UserService;
+import com.yinuo.util.MD5Util;
 
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})  
@@ -43,7 +43,7 @@ public class UserServiceTest {
 		log.info("insert user:"+user);
 		//如果存在先删除在增加
 		try{
-			userService.deleteByMobile(mobile);
+			//userService.deleteByMobile(mobile);
 			long id = userService.insert(user);
 			log.info("insert user id is " + id);
 			log.info("insert user id2 is " + user.getId());
@@ -53,27 +53,6 @@ public class UserServiceTest {
 			Assert.assertTrue(false);
 		}
 	}
-	
-	@Test
-	public void selectByMobile() {
-		User user = userService.selectByMobile(mobile);
-		System.out.println(user);
-	}
-	
-//	@Test
-	public void delete() {
-		User user = userService.selectByMobile(mobile);
-		userService.delete(user.getId());
-		
-	}
-
-//	@Test
-	public void update() {
-		
-		User user = userService.selectByMobile(mobile);
-		userService.update(user);
-	}
-
 	
 	
 }

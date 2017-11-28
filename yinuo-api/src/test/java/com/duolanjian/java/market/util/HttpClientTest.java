@@ -8,19 +8,11 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.duolanjian.java.market.controller.UserController;
+import com.yinuo.util.HttpUtil;
 
 public class HttpClientTest {
 
-	private static final String appid= "wx254e077517572b8a";
-	
-	private static final String appsecret = "d21ea703e91c9cae25dff51d2aeb177b";
-
-	private Logger logger = LoggerFactory.getLogger(UserController.class);
-	
 	@Test
     public void testGet() {
         //百度天气的api

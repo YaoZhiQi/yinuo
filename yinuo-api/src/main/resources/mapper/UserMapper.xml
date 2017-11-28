@@ -3,16 +3,20 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.duolanjian.java.market.mapper.UserMapper">
+<mapper namespace="com.yinuo.mapper.UserMapper">
 
 	<resultMap id="userMap" type="User">
 		<result property="id" column="pk_id" />
-		<result property="weichat" column="weichat" />
+		<result property="wechatNickname" column="wechat_nickname" />
+		<result property="wechatOpenid" column="wechat_openid" />
+		<result property="sex" column="sex" />
+		<result property="birthday" column="birthday" />
+		<result property="createTime" column="create_time" />
 	</resultMap>
 	
     <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO t_user(`weichat`) 
-		VALUES(#{weichat})
+		INSERT INTO t_user(`wechat_nickname`, `wechat_openid`, `sex`, `birthday`, `create_time`) 
+		VALUES(#{wechatNickname}, #{wechatOpenid}, #{sex}, #{birthday}, #{createTime})
 	</insert>
 	<select id="selectOne" parameterType="Map" resultMap="userMap">
 		SELECT * 
@@ -43,10 +47,13 @@
 	        #{item}
 	    </foreach>
     </select>
-
 	<update id="update" parameterType="User">
 		UPDATE t_user
-		SET `weichat` = #{weichat}
+		SET `wechat_nickname` = #{wechatNickname},
+		`wechat_openid` = #{wechatOpenid},
+		`sex` = #{sex},
+		`birthday` = #{birthday},
+		`create_time` = #{createTime}
 		WHERE pk_id = #{id}
 	</update>
 
@@ -58,5 +65,10 @@
 	<delete id="deleteAll">
 		delete from t_user
     </delete>
+	<select id="selectByOpenid" parameterType="Map" resultMap="userMap">
+		SELECT * 
+		FROM t_user
+		WHERE `wechat_openid` = #{wechatOpenid}
+	</select>
 	
 </mapper>

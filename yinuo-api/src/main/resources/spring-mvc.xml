@@ -21,7 +21,7 @@
 <!--     <task:annotation-driven/> -->
 	
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.duolanjian.java.market" />
+	<context:component-scan base-package="com.yinuo" />
 
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
@@ -42,7 +42,7 @@
      
     <!-- 拦截器配置 -->
     <mvc:interceptors>
-        <bean class="com.duolanjian.java.market.inteceptor.IndexInteceptor" />
+        <bean class="com.yinuo.inteceptor.IndexInteceptor" />
     </mvc:interceptors>
      
      <!-- 上传 需要使用到的配置
