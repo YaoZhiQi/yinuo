@@ -6,6 +6,7 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,6 +53,14 @@ public class UserServiceTest {
 			e.printStackTrace();
 			Assert.assertTrue(false);
 		}
+	}
+	
+	@Test
+	public void update() {
+		User user = new User();
+		user.setId(1l);
+		user.setWechatNickname("chenlisongabc");
+		userService.update(user);
 	}
 	
 	

@@ -22,3 +22,18 @@ wechat登陆
 		}
 	
 		以后每次请求，在header中带上，key:ticket, value:${id}
+
+更新用户信息
+	request/put: /users
+
+		{
+			"id": 1,
+			"birthday": "1970-01-01 08:00:00",
+			"sex": 1,	//1男，2女
+			"wechatNickname": "微信昵称",
+		}
+
+	response:
+		{
+			"id": 1
+		}

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yinuo.bean.User;
 import com.yinuo.mapper.UserMapper;
 import com.yinuo.util.CommonUtil;
+import com.yinuo.util.MergerUtil;
 
 @Transactional(rollbackFor = Exception.class)
 @Service
@@ -39,7 +40,10 @@ public class UserService {
 		userMapper.delete(id);
 	}
 	
+	//只能自己修改自己的数据场景
 	public void update(User user) {
+		User src = selectOne(user.getId());
+		user = (User) MergerUtil.merger(src, user);
 		userMapper.update(user);
 	}
 	

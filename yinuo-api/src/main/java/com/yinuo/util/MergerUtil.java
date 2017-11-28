@@ -19,7 +19,7 @@ public class MergerUtil {
 	 * @throws NoSuchMethodException 
 	 * @throws Exception
 	 */
-	public static Object merger(Object src,Object update) throws NoSuchMethodException, SecurityException {
+	public static Object merger(Object src,Object update) {
 		
 		if(src == null){
 			throw new InvalidArgumentException("can not find object.");
@@ -32,21 +32,25 @@ public class MergerUtil {
 		}
 		
 		for(Field field : fields){
-			String getMethodName = "get"+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1);
-			String setMethodName = "set"+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1);
-			Method getMethod = update.getClass().getDeclaredMethod(getMethodName);
-			Object updateObj = invokeObject(getMethod,update);
-			
-			if(updateObj == null){
-				Object srcObj = invokeObject(getMethod,src);
-				if(srcObj != null && srcObj.getClass() == Date.class){
-					Date dateSrcObj = (Date)srcObj;
-					Method setMethod = update.getClass().getDeclaredMethod(setMethodName,String.class);
-					invokeObject(setMethod,update, DateTool.standardSdf.format(dateSrcObj));
-				}else if(srcObj != null){
-					Method setMethod = update.getClass().getDeclaredMethod(setMethodName,srcObj.getClass());
-					invokeObject(setMethod,update, srcObj);
+			try{
+				String getMethodName = "get"+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1);
+				String setMethodName = "set"+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1);
+				Method getMethod = update.getClass().getDeclaredMethod(getMethodName);
+				Object updateObj = invokeObject(getMethod,update);
+				
+				if(updateObj == null){
+					Object srcObj = invokeObject(getMethod,src);
+					if(srcObj != null && srcObj.getClass() == Date.class){
+						Date dateSrcObj = (Date)srcObj;
+						Method setMethod = update.getClass().getDeclaredMethod(setMethodName,String.class);
+						invokeObject(setMethod,update, DateTool.standardSdf.format(dateSrcObj));
+					}else if(srcObj != null){
+						Method setMethod = update.getClass().getDeclaredMethod(setMethodName,srcObj.getClass());
+						invokeObject(setMethod,update, srcObj);
+					}
 				}
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
 		}
 		return update;
